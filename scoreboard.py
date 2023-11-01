@@ -6,17 +6,24 @@ class Scoreboard(Turtle):
     def __init__(self):
         super().__init__()
         self.penup()
+        self.score = 0
+        self.high_score = 0
         self.color('white')
         self.goto(0,270)
         self.hideturtle()
+        # self.update_scoreboard()
 
-        self.score = 1
-
-    def write_score(self):
+    def update_scoreboard(self):
         self.clear()
-        self.write(f'Score : {self.score}', False, align=ALIGHTMENT,font=FONT)
+        self.write(f"Score : {self.score}  High Score: {self.high_score}", False, align=ALIGHTMENT,font=FONT)
+
+    def resets(self):
+        if self.score>self.high_score:
+            self.high_score = self.score
+        self.score = 0
+        self.update_scoreboard()
+
+    def increase_score(self):
         self.score += 1
-        #
-    def game_over(self):
-        self.goto(0, 0)
-        self.write("Game Over", True, align = "center", font = FONT)
+        self.clear()
+        self.update_scoreboard()
